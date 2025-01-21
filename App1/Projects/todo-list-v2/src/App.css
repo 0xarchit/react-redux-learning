@@ -1,0 +1,12 @@
+input {
+    width: 100%;
+}
+
+.row-prop{
+    margin: 10px 5px;
+}
+
+.btn-prop{
+    min-width: 80px;
+    margin: 2px 0px;
+}
