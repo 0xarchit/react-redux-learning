@@ -1,18 +1,34 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import FoodItems from "./components/FoodItems";
 import ErrorMessage from "./components/ErrorMessage";
 import Container from "./components/Container";
-import "./App.css";
-import FootInput from "./components/FoodInput";
+import FoodInput from "./components/FoodInput";
+import { useState } from "react";
 
 function App() {
-  let foodItems = ['dal', 'roti', 'green vegetables', 'salad', 'milk', 'ghee'];
+  // let [foodItems, setFoodItems] = useState(['dal', 'roti', 'green vegetables', 'salad', 'milk', 'ghee']);
+  let [foodItems, setFoodItems] = useState([]);
+  
   // let foodItems = [];
+  // let [textToShow, setTextToShow] = useState();
+
+  const onKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      let newFoodItem = event.target.value;
+      setFoodItems([...foodItems, newFoodItem]);
+      event.target.value = '';
+    }
+    
+  
+};
+
   return <>
     <Container>
       <h1 className="food-heading">Healthy food</h1>
       <ErrorMessage items={foodItems} />
-      <FootInput />
+      <FoodInput handleOnKeyDown={onKeyDown} />
+      {/* <p className="pfont">{textToShow}</p> */}
       <FoodItems items={foodItems} />
     </Container>
 

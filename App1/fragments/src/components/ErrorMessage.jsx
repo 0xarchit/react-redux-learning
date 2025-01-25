@@ -2,7 +2,7 @@
 const ErrorMessage = ({items}) => {
     return <>
         {/* {foodItems.length === 0 ? <h3>Please add food items</h3> : null}*/}
-        {items.length === 0 && <h3>Please add food items</h3>}
+        {items.length === 0 && <h3>I am hungry. Please add food items</h3>}
     </>
 }
 

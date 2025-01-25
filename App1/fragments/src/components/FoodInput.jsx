@@ -1,12 +1,7 @@
 import styles from './FoodInput.module.css'
 
-
-const handleOnChange = (event) => {
-    console.log(event.target.value);
-};
-
-const FootInput = () => {
-    return <input className={styles.foodInput} type="text" onChange={handleOnChange}/>
+const FootInput = ({handleOnKeyDown}) => {
+    return <input className={styles.foodInput} type="text" onKeyDown={handleOnKeyDown}/>
 };
 
 export default FootInput;

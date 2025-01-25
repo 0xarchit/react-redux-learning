@@ -1,4 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Aclonica");
+@import url("https://fonts.googleapis.com/css?family=Alex+Brush");
 .food-heading {
   color: rgba(243, 52, 52, 0.747);
   text-align: center;
+}
+
+.pfont {
+  font-family: "Aclonica";
 }
