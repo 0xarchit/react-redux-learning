@@ -1,26 +1,17 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { BiMessageAdd } from "react-icons/bi";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const noOfUpdates = useRef(0);
-
-  const handleNameChange = (event) => {
-    setTodoName(event.target.value);
-    noOfUpdates.current++;
-  };
-
-  const handleDateChange = (event) => {
-    setDueDate(event.target.value);
-    console.log(`no of updates: ${noOfUpdates.current}`);
-  };
+  const todoNameElement = useRef();
+  const todoDateElement = useRef();
 
   const handleAddButtonClicked = (event) => {
     event.preventDefault();
+    const todoName = todoNameElement.current.value;
+    const dueDate = todoDateElement.current.value;
+    todoNameElement.current.value = "";
+    todoDateElement.current.value = "";
     onNewItem(todoName, dueDate);
-    setDueDate("");
-    setTodoName("");
   };
 
   return (
@@ -29,19 +20,13 @@ function AddTodo({ onNewItem }) {
         <div className="col-6">
           <input
             type="text"
+            ref={todoNameElement}
             placeholder="Enter Todo Here..."
-            value={todoName}
-            onChange={handleNameChange}
             required
           />
         </div>
         <div className="col-4">
-          <input
-            type="date"
-            value={dueDate}
-            onChange={handleDateChange}
-            required
-          />
+          <input type="date" ref={todoDateElement} required />
         </div>
         <div className="col-2">
           <button className="btn btn-success btn-prop">
