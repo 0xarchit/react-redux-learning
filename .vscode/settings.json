@@ -1,3 +1,5 @@
 {
-    "vs-browser.url": "http://localhost"
+    "vs-browser.url": "http://localhost",
+    "editor.formatOnSave": true,
+    "files.autoSave": "onFocusChange"
 }
