@@ -8,14 +8,22 @@ const PostList = () => {
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    if (postList.length > 0) return; // added: don't override new posts
     setFetching(true);
-    fetch("https://dummyjson.com/posts")
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch("https://dummyjson.com/posts", { signal })
       .then((res) => res.json())
       .then((data) => {
         getPosts(data.posts);
         setFetching(false);
       });
-  }, []);
+    return () => {
+      console.log("Cleaning up useEffect");
+      controller.abort();
+      setFetching(false);
+    };
+  }, [postList.length]);
 
   return (
     <>
