@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useCallback, useReducer } from "react";
 
 export const PostList = createContext({
   postList: [],
@@ -30,9 +30,9 @@ const PostListProvider = ({ children }) => {
     dispatchPostList({ type: "GET_POSTS", payload: { posts } });
   };
 
-  const deletePost = (postId) => {
+  const deletePost = useCallback((postId) => {
     dispatchPostList({ type: "DELETE_POST", payload: { postId } });
-  };
+  }, []);
 
   return (
     <PostList.Provider value={{ postList, addPost, deletePost, getPosts }}>
