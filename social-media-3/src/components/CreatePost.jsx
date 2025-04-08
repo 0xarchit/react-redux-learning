@@ -1,7 +1,11 @@
 import { useContext, useRef } from "react";
 import { PostList } from "../store/post-list-store";
+import { useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
+  const { addPost } = useContext(PostList);
+  const navigate = useNavigate();
+
   const userIdElement = useRef();
   const postTitleElement = useRef();
   const postBodyElement = useRef();
@@ -9,7 +13,6 @@ const CreatePost = () => {
   const likesElement = useRef();
   const dislikesElement = useRef();
 
-  const { addPost } = useContext(PostList);
   const handleSubmit = (event) => {
     event.preventDefault();
     const userId = userIdElement.current.value;
@@ -34,7 +37,10 @@ const CreatePost = () => {
       }),
     })
       .then((res) => res.json())
-      .then((post) => addPost(post));
+      .then((post) => {
+        addPost(post);
+        navigate("/");
+      });
 
     userIdElement.current.value = "";
     postTitleElement.current.value = "";
