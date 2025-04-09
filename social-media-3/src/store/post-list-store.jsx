@@ -22,23 +22,23 @@ const postListReducer = (currPostList, action) => {
 const PostListProvider = ({ children }) => {
   const [postList, dispatchPostList] = useReducer(postListReducer, []);
 
-  const addPost = (post) => {
+  const addPost = useCallback((post) => {
     dispatchPostList({ type: "ADD_POST", payload: { post } });
-  };
+  }, []);
 
-  const getPosts = (posts) => {
+  const getPosts = useCallback((posts) => {
     dispatchPostList({ type: "GET_POSTS", payload: { posts } });
-  };
+  }, []);
 
   const deletePost = useCallback((postId) => {
     dispatchPostList({ type: "DELETE_POST", payload: { postId } });
   }, []);
 
-  return (
-    <PostList.Provider value={{ postList, addPost, deletePost, getPosts }}>
-      {children}
-    </PostList.Provider>
-  );
+  const contextValue = useMemo(() => {
+    return { postList, addPost, deletePost, getPosts };
+  }, [postList, addPost, deletePost, getPosts]);
+
+  return <PostList.Provider value={contextValue}>{children}</PostList.Provider>;
 };
 
 export default PostListProvider;
