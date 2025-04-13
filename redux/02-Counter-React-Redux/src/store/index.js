@@ -8,13 +8,13 @@ const INITIAL_VALUE =
 const counterReducer = (store = INITIAL_VALUE, action) => {
     switch (action.type) {
         case "INCREMENT":
-            return {counter: store.counter + 1};
+            return {...store, counter: store.counter + 1};
         case "DECREMENT":
-            return { counter: store.counter - 1 };
+            return {...store, counter: store.counter - 1};
         case "RESET":
-            return { counter: 0 };
+            return {...store, counter: 0 };
         case "ADD":
-            return { counter: store.counter + Number(action.payload) };
+            return {...store, counter: store.counter + Number(action.payload)};
         default:
             return store;
     }
